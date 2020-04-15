@@ -6,8 +6,10 @@ import static org.junit.Assert.assertNotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.capgemini.jpa.repositories.EventRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +22,9 @@ import com.capgemini.jpa.entities.Event;
 @DataJpaTest
 public class Task3 {
 
+	@Autowired
+	private EventRepository eventRepository;
+
 	@Test
 	public void shouldReturnThirdPageOfEventsSortedByTime() throws Exception {
 		// given
@@ -28,7 +33,7 @@ public class Task3 {
 		Sort sort = new Sort("time");
 
 		// when
-		Page<Event> result = null; //TODO: add repository method call here
+		Page<Event> result = eventRepository.findAll(new PageRequest(page, pageSize, sort));
 
 		// then
 		assertNotNull(result);

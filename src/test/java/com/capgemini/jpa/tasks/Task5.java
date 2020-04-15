@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.EntityManager;
 
+import com.capgemini.jpa.repositories.EventRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class Task5 {
 
 	@Autowired
 	EntityManager entityManager;
+
+	@Autowired
+	private EventRepository eventRepository;
 	
 	@Test
 	public void shouldUpdateEventsLongerThanInBulk() throws Exception {
@@ -31,7 +35,7 @@ public class Task5 {
 		Class<RequestEvent> clazz = RequestEvent.class;
 
 		// when
-//		repository.updateInBulkToBeAnalyzedByType(clazz, threshold);
+		eventRepository.updateInBulkToBeAnalyzedByType(clazz, threshold);
 
 		// then
 		assertEquals(3,

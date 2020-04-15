@@ -6,8 +6,11 @@ import static org.junit.Assert.assertNotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.capgemini.jpa.repositories.EventRepository;
+import com.capgemini.jpa.services.ServerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -17,6 +20,8 @@ import com.capgemini.jpa.entities.Event;
 @DataJpaTest
 public class Task2 {
 
+	@Autowired
+	private EventRepository eventRepository;
 	
 	@Test
 	public void shouldFindOneEntryBetweenDatesThatMustBeAnalyzed() throws Exception {
@@ -26,7 +31,7 @@ public class Task2 {
 		boolean toBeAnalyzed = false;
 		
 		// when
-		List<Event> result = null; //TODO: add repository method call here
+		List<Event> result = eventRepository.findAllByTimeBetweenAndAnalysisRequired(start, end, toBeAnalyzed);
 
 		// then
 		assertNotNull(result);
